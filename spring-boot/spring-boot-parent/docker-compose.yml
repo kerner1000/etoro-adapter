@@ -1,0 +1,68 @@
+version: '2.1'
+
+services:
+
+  transaction:
+    build: ../transactions-service
+    mem_limit: 350m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  position:
+    build: ../positions-service
+    mem_limit: 350m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  taxonomy:
+    build: ../taxonomy-service
+    mem_limit: 350m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  morningstar-taxonomy:
+    build: ../morningstar-taxonomy-service
+    mem_limit: 350m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  composite:
+    build: ../composite-service
+    mem_limit: 350m
+    ports:
+      - "7070:7070"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  client:
+    build: ../thymeleaf-client
+    mem_limit: 350m
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  # $ mysql -uroot -h127.0.0.1 -p
+  mysql:
+    build: ../../etoro-mysql
+    mem_limit: 350m
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: etoro-stats
+      MYSQL_USER: etoro-stats
+      MYSQL_PASSWORD: etoro
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-uetoro-stats", "-petoro", "-h", "localhost", "--port", "3307"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
