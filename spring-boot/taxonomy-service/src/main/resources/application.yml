@@ -1,0 +1,40 @@
+spring.main.banner-mode: off
+
+server:
+  port: 7003
+
+logging:
+   level:
+     root: INFO
+     com.github.kerner1000: DEBUG
+
+app:
+  taxonomy-provider:
+    host: localhost
+    port: 7005
+
+# Strongly recommend to set this property to "none" in a production environment!
+spring.jpa.hibernate.ddl-auto: update
+
+spring.datasource:
+  url: jdbc:mysql://localhost/etoro-taxonomies
+  username: etoro-taxonomies
+  password: etoro
+
+spring.datasource.hikari.initializationFailTimeout: 60000
+spring.jpa.database: mysql
+---
+server.port: 8080
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:mysql://mysql:3306/etoro-stats
+    username: etoro-stats
+    password: etoro
+
+app:
+  taxonomy-provider:
+    host: morningstar-taxonomy
+    port: 8080
