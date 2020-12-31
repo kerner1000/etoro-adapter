@@ -1,0 +1,40 @@
+spring.main.banner-mode: off
+
+server:
+  port: 7002
+
+logging:
+  level:
+    root: INFO
+    com.github.kerner1000: DEBUG
+
+app:
+  transactions-service:
+    host: localhost
+    port: 7004
+
+  taxonomy-service:
+    host: localhost
+    port: 7003
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+server.port: 8080
+
+app:
+  transactions-service:
+    host: transaction
+    port: 8080
+
+  taxonomy-service:
+    host: taxonomy
+    port: 8080
+
+logging:
+  level:
+    root: INFO
+      com.github.kerner1000: INFO
