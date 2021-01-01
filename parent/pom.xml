@@ -10,6 +10,9 @@
     <packaging>pom</packaging>
 
     <properties>
+        <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+        <github-user>kerner1000</github-user>
+        <github-repo>etoro-stats</github-repo>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>14</java.version>
     </properties>
@@ -31,6 +34,21 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+
+    <scm>
+        <connection>scm:git:https://github.com/${github-user}/${github-repo}.git</connection>
+        <developerConnection>scm:git:git@github.com:${github-user}/${github-repo}.git</developerConnection>
+        <url>https://github.com/${github-user}/${github-repo}</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>local-release-repo</id>
+            <name>alex-local</name>
+            <url>file://${user.home}/local-maven-repository</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <plugins>
@@ -55,8 +73,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
-
-
 </project>

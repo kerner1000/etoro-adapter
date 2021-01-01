@@ -37,4 +37,4 @@ app:
 logging:
   level:
     root: INFO
-      com.github.kerner1000: INFO
+    com.github.kerner1000: INFO
