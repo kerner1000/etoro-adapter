@@ -1,26 +1,87 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.github.kerner1000.etoro-stats</groupId>
-        <artifactId>parent</artifactId>
-        <version>0.1.0</version>
-       <relativePath>parent</relativePath>
-    </parent>
+    <groupId>com.github.kerner1000.etoro-stats</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <groupId>com.github.kerner1000.etoro-stats</groupId>
-    <artifactId>aggregator</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <properties>
+        <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+        <github-user>kerner1000</github-user>
+        <github-repo>etoro-stats</github-repo>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>14</java.version>
+    </properties>
 
-    <modules>
+    <developers>
+        <developer>
+            <id>kerner</id>
+            <name>Alexander Kerner</name>
+            <email>alexkerner1000@gmail.com</email>
+            <roles>
+                <role>Project Manager</role>
+                <role>Architect</role>
+            </roles>
+        </developer>
+    </developers>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:https://github.com/${github-user}/${github-repo}.git</connection>
+        <developerConnection>scm:git:git@github.com:${github-user}/${github-repo}.git</developerConnection>
+        <url>https://github.com/${github-user}/${github-repo}</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>local-release-repo</id>
+            <name>alex-local</name>
+            <url>file://${user.home}/local-maven-repository</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.7.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+
+  <modules>
         <module>model/</module>
         <module>io</module>
         <module>morningstar-taxonomies</module>
         <module>spring-boot</module>
     </modules>
 
+
 </project>
+
