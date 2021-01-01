@@ -8,7 +8,7 @@
         <groupId>com.github.kerner1000.etoro-stats</groupId>
         <artifactId>parent</artifactId>
         <version>0.1.0</version>
-       <relativePath>../parent</relativePath>
+       <relativePath>parent</relativePath>
     </parent>
     <packaging>pom</packaging>
 
@@ -17,10 +17,10 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
-        <module>../model/</module>
-        <module>../io</module>
-        <module>../morningstar-taxonomies</module>
-        <module>../spring-boot/spring-boot-aggregator</module>
+        <module>model/</module>
+        <module>io</module>
+        <module>morningstar-taxonomies</module>
+        <module>spring-boot</module>
     </modules>
 
 </project>
