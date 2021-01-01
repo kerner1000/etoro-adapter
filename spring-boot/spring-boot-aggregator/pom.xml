@@ -19,9 +19,7 @@
         <module>../spring-boot-util</module>
         <module>../composite-service</module>
         <module>../transactions-service</module>
-        <module>../transactions-poster</module>
         <module>../morningstar-taxonomy-service</module>
-        <module>../etoro-api</module>
         <module>../thymeleaf-client</module>
         <module>../spring-boot-parent</module>
     </modules>
