@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
      <parent>
         <groupId>com.github.kerner1000.etoro-stats-spring-boot</groupId>
         <artifactId>etoro-stats-spring-boot</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -39,12 +37,12 @@
         <dependency>
             <groupId>com.github.kerner1000.etoro-stats-spring-boot</groupId>
             <artifactId>spring-boot-util</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.github.kerner1000.etoro-stats-spring-boot</groupId>
             <artifactId>spring-boot-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
     </dependencies>
 
