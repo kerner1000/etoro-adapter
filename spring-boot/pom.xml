@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>spring-boot-parent</artifactId>
+        <groupId>com.github.kerner1000.etoro-stats-spring-boot</groupId>
+        <version>0.0.1</version>
+        <relativePath>spring-boot-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <artifactId>spring-boot-aggregator</artifactId>
+
+    <modules>
+        <module>taxonomy-service</module>
+        <module>positions-service</module>
+        <module>spring-boot-api</module>
+        <module>spring-boot-util</module>
+        <module>composite-service</module>
+        <module>transactions-service</module>
+        <module>morningstar-taxonomy-service</module>
+        <module>thymeleaf-client</module>
+        <module>spring-boot-parent</module>
+    </modules>
+
+</project>
