@@ -118,8 +118,7 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
-                    <githubAPIScheme>https</githubAPIScheme>
-                    <githubAPIPort>443</githubAPIPort>
+                    <onlyMilestoneIssues>false</onlyMilestoneIssues>
                 </configuration>
             </plugin>
         </plugins>
