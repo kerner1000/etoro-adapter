@@ -6,7 +6,7 @@
     <parent>
         <artifactId>etoro-stats-spring-boot</artifactId>
         <groupId>com.github.kerner1000.etoro-stats-spring-boot</groupId>
-        <version>0.0.3</version>
+        <version>0.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -40,13 +40,13 @@
         <dependency>
             <groupId>com.github.kerner1000.etoro-stats-spring-boot</groupId>
             <artifactId>spring-boot-api</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.4-SNAPSHOT</version>
 
         </dependency>
         <dependency>
             <groupId>com.github.kerner1000.etoro-stats</groupId>
             <artifactId>yahoo-taxonomies</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.4-SNAPSHOT</version>
 
         </dependency>
     </dependencies>

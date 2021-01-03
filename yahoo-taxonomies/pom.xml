@@ -6,7 +6,7 @@
     <parent>
         <artifactId>etoro-stats</artifactId>
         <groupId>com.github.kerner1000.etoro-stats</groupId>
-        <version>0.0.3</version>
+        <version>0.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.github.kerner1000.etoro-stats</groupId>
             <artifactId>model</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.mashape.unirest</groupId>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>com.github.kerner1000.etoro-stats</groupId>
             <artifactId>taxonomy-prototypes</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.4-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
