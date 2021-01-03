@@ -38,10 +38,6 @@ public class DefaultCompositeService implements CompositeService {
         return integration.getTaxonomy(name, instrument);
     }
 
-    @Override
-    public DefaultTaxonomy getTaxonomy(String exchange, String identifier, String instrument) {
-        return integration.getTaxonomy(exchange, identifier, instrument);
-    }
 
     @Override
     public TransactionGroup getTransactions(String instrument) {
@@ -88,10 +84,6 @@ public class DefaultCompositeService implements CompositeService {
         return integration.getOpenPositionsGroupedByIndustry();
     }
 
-    @Override
-    public Set<String> getExchangeForTicker(String ticker) {
-        return integration.getExchangeForTicker(ticker);
-    }
 
     @Override
     public PositionGroups getSectorBreakdown() {

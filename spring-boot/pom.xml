@@ -78,6 +78,7 @@
         <module>transactions-service</module>
         <module>morningstar-taxonomy-service</module>
         <module>thymeleaf-client</module>
+        <module>yahoo-taxonomy-service</module>
     </modules>
 
     <build>
