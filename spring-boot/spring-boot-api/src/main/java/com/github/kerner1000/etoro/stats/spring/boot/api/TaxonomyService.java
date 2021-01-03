@@ -12,15 +12,7 @@ import java.util.Set;
 
 public interface TaxonomyService extends TaxonomyProvider {
 
-
-    @Deprecated
     @GetMapping(value="taxonomy/{identifier}/{instrument}", produces = "application/json")
     DefaultTaxonomy getTaxonomy(@PathVariable String identifier, @PathVariable String instrument);
-
-    @GetMapping(value="taxonomy/{exchange}/{identifier}/{instrument}", produces = "application/json")
-    DefaultTaxonomy getTaxonomy(@PathVariable String exchange, @PathVariable String identifier, @PathVariable String instrument);
-
-    @GetMapping(value="taxonomy/{ticker}", produces = "application/json")
-    Set<String> getExchangeForTicker(@PathVariable String ticker);
 
 }

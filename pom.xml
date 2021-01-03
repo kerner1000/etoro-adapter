@@ -128,7 +128,9 @@
         <module>model</module>
         <module>io</module>
         <module>morningstar-taxonomies</module>
+        <module>yahoo-taxonomies</module>
         <module>spring-boot</module>
+        <module>taxonomy-prototypes</module>
     </modules>
 
 

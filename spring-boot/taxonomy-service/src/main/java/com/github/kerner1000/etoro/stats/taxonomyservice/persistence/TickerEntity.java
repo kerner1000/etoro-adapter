@@ -13,9 +13,6 @@ public class TickerEntity {
     @Id
     private String name;
 
-    @ManyToMany
-    private Set<ExchangeEntity> exchanges;
-
     @OneToMany
     private Set<TaxonomyEntity> taxonomies;
 
@@ -26,16 +23,14 @@ public class TickerEntity {
 
     public TickerEntity() {
         this.taxonomies = new LinkedHashSet<>();
-        this.exchanges = new LinkedHashSet<>();
+
     }
 
     @Override
     public String toString() {
         return "TickerEntity{" +
                 "version=" + version +
-                ", name='" + name + '\'' +
-                ", exchange=" + exchanges.size() +
-                '}';
+                ", name='" + name;
     }
 
     @Override
@@ -65,14 +60,6 @@ public class TickerEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<ExchangeEntity> getExchanges() {
-        return exchanges;
-    }
-
-    public void setExchanges(Set<ExchangeEntity> exchange) {
-        this.exchanges = exchange;
     }
 
     public Set<TaxonomyEntity> getTaxonomies() {

@@ -1,34 +1,31 @@
-package com.github.kerner1000.etoro.stats.taxonomy.morningstar.services;
+package com.github.kerner1000.etoro.stats.taxonomy.yahoo.services;
 
-import com.github.kerner1000.etoro.stats.api.MorningstarAPI;
 import com.github.kerner1000.etoro.stats.model.DefaultTaxonomy;
 import com.github.kerner1000.etoro.stats.model.TaxonomyProvider;
 import com.github.kerner1000.etoro.stats.spring.boot.api.TaxonomyService;
+import com.github.kerner1000.etoro.stats.taxonomy.yahoo.YahooAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
-public class DefaultMorningstarTaxonomyService implements TaxonomyService, TaxonomyProvider {
+public class DefaultYahooTaxonomyService implements TaxonomyService, TaxonomyProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(DefaultMorningstarTaxonomyService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultYahooTaxonomyService.class);
 
-    private final MorningstarAPI api;
+    private final YahooAPI api;
 
-    public DefaultMorningstarTaxonomyService(@Value("${app.morningstar.apikey}") String apikey) {
-        this.api = new MorningstarAPI(apikey);
+    public DefaultYahooTaxonomyService(@Value("${app.morningstar.apikey}") String apikey) {
+        this.api = new YahooAPI(apikey);
     }
-
-
 
     @Override
     public DefaultTaxonomy getTaxonomy(String identifier, String instrument) {
 
-        logger.info("Querying MorningStar API for identifier: '{}' and instrument: '{}'", identifier, instrument);
+        logger.info("Querying Yahoo API for identifier: '{}' and instrument: '{}'", identifier, instrument);
 
         DefaultTaxonomy taxonomy = buildTaxonomy(identifier, instrument);
 
@@ -43,13 +40,13 @@ public class DefaultMorningstarTaxonomyService implements TaxonomyService, Taxon
         result.setInstrument(instrument);
         switch (identifier) {
             case "industry":
-                result.setValue(api.findIndustry(instrument));
+                result.setValue(api.getIndustry(instrument));
                 break;
             case "sector":
-                result.setValue(api.findSector(instrument));
+                result.setValue(api.getSector(instrument));
                 break;
             case "name":
-                result.setValue(api.findName(instrument));
+                result.setValue(api.getShortName(instrument));
                 break;
             default:
                 throw new RuntimeException("Unknown identifier " + identifier);

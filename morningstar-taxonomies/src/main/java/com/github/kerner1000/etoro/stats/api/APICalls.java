@@ -1,5 +1,6 @@
 package com.github.kerner1000.etoro.stats.api;
 
+import com.github.kerner1000.etoro.stats.taxonomy.prototypes.APICallsProto;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -12,20 +13,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-class APICalls {
+class APICalls extends APICallsProto {
 
     private static final Logger logger = LoggerFactory.getLogger(APICalls.class);
-
-    private static final int DEFAULT_API_REST_TIME = 700;
 
     private final String apiKey;
 
     public APICalls(String apiKey) {
         this.apiKey = apiKey;
-    }
-
-    static String encodeValue(String value) throws UnsupportedEncodingException {
-        return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
     }
 
     JsonNode requestForJsonNode(String request) {

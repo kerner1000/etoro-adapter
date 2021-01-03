@@ -26,8 +26,6 @@ public class DefaultTaxonomyService implements TaxonomyService {
 
     private final TaxonomyRepository taxonomyRepository;
 
-    private final ExchangeRepository exchangeRepository;
-
     private final TickerRepository tickerRepository;
 
     private final TaxonomyMapper mapper;
@@ -37,19 +35,12 @@ public class DefaultTaxonomyService implements TaxonomyService {
                            CompositeIntegration compositeIntegration,
                            TaxonomyRepository taxonomyRepository,
                            TaxonomyMapper mapper,
-                           ExchangeRepository exchangeRepository,
                            TickerRepository tickerRepository) {
         this.serviceUtil = serviceUtil;
         this.compositeIntegration = compositeIntegration;
         this.taxonomyRepository = taxonomyRepository;
         this.mapper = mapper;
-        this.exchangeRepository = exchangeRepository;
         this.tickerRepository = tickerRepository;
-    }
-
-    @Override
-    public Set<String> getExchangeForTicker(String ticker) {
-        return compositeIntegration.getExchangeForTicker(ticker);
     }
 
     @Transactional
@@ -69,59 +60,22 @@ public class DefaultTaxonomyService implements TaxonomyService {
     }
 
     @Transactional
-    Set<ExchangeEntity> getExchangeEntity(TickerEntity tickerEntity) {
-
-        if(tickerEntity.getName().toLowerCase().contains("pltr")){
-            int wait = 0;
-        }
-
-        Set<ExchangeEntity> exchangeEntities = exchangeRepository.getExchangeEntityByTickersContains(tickerEntity);
-
-        if (exchangeEntities == null || exchangeEntities.isEmpty()) {
-            Set<String> exchangeName = compositeIntegration.getExchangeForTicker(tickerEntity.getName());
-            for (String en : exchangeName) {
-                ExchangeEntity exchangeEntity2 = exchangeRepository.getExchangeEntityByName(en);
-                if (exchangeEntity2 == null) {
-                    exchangeEntity2 = exchangeRepository.save(new ExchangeEntity(en));
-                    logger.info("Saved new {}: {}", ExchangeEntity.class.getSimpleName(), exchangeEntity2);
-                }
-                exchangeEntities.add(exchangeEntity2);
-            }
-        }
-
-        exchangeEntities.forEach(e -> e.getTickers().add(tickerEntity));
-        tickerEntity.setExchanges(exchangeEntities);
-
-        return exchangeEntities;
-    }
-
-    @Override
-    public DefaultTaxonomy getTaxonomy(String exchange, String identifier, String instrument) {
-        TickerEntity tickerEntity = getTickerEntity(instrument);
-        ExchangeEntity exchangeEntity = exchangeRepository.getExchangeEntityByName(exchange);
-        DefaultTaxonomy defaultTaxonomy = getTaxonomy(identifier, tickerEntity, exchangeEntity);
-        return defaultTaxonomy;
-    }
-
-    @Transactional
     @Override
     public DefaultTaxonomy getTaxonomy(String identifier, String instrument) {
 
         TickerEntity tickerEntity = getTickerEntity(instrument);
 
-        Set<ExchangeEntity> exchangeEntity = getExchangeEntity(tickerEntity);
-
-        DefaultTaxonomy defaultTaxonomy = getTaxonomy(identifier, tickerEntity, exchangeEntity.iterator().next());
+        DefaultTaxonomy defaultTaxonomy = getTaxonomy(identifier, tickerEntity);
 
         return defaultTaxonomy;
     }
 
-    DefaultTaxonomy getTaxonomy(String identifier, TickerEntity tickerEntity, ExchangeEntity exchangeEntity) {
+    DefaultTaxonomy getTaxonomy(String identifier, TickerEntity tickerEntity) {
         Taxonomy taxonomy = taxonomyRepository.getTaxonomyEntityByIdentifierAndTickerEntity(identifier, tickerEntity);
 
         if (taxonomy == null || !taxonomy.isComplete()) {
             logger.debug("Didn't find in db [{}], asking delegate", identifier + "," + tickerEntity);
-            taxonomy = compositeIntegration.getTaxonomy(exchangeEntity.getName(), identifier, tickerEntity.getName());
+            taxonomy = compositeIntegration.getTaxonomy(identifier, tickerEntity.getName());
             logger.debug("Got {} from composite, persisting", taxonomy);
 
             TaxonomyEntity taxonomyEntity = mapper.apiToEntity(taxonomy, new TaxonomyApi2EntityHelper());

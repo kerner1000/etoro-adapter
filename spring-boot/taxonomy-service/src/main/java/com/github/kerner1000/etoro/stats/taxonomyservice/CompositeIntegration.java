@@ -46,75 +46,9 @@ public class CompositeIntegration implements TaxonomyService {
 
     }
 
-    @Override
-    public DefaultTaxonomy getTaxonomy(String exchange, String identifier, String instrument) {
 
-        if(exchange == null){
-            return getTaxonomy(identifier, instrument);
-        }
 
-        if(identifier == null || instrument == null){
-            throw new IllegalArgumentException();
-        }
-        try {
-            String url = taxonomyProviderUrl + exchange + "/" + identifier + "/" + instrument;
-            logger.debug("Will call API on URL: {}", url);
 
-            DefaultTaxonomy result = restTemplate.getForObject(url, DefaultTaxonomy.class);
-            logger.debug("returning: {}", result);
-
-            return result;
-
-        } catch (HttpClientErrorException ex) {
-
-            switch (ex.getStatusCode()) {
-
-                case NOT_FOUND:
-                    throw new NotFoundException(getErrorMessage(ex));
-
-                case UNPROCESSABLE_ENTITY :
-                    throw new InvalidInputException(getErrorMessage(ex));
-
-                default:
-                    logger.warn("Got a unexpected HTTP error: {}, will rethrow it", ex.getStatusCode());
-                    logger.warn("Error body: {}", ex.getResponseBodyAsString());
-                    throw ex;
-            }
-        }
-    }
-
-    @Override
-    public Set<String> getExchangeForTicker(String ticker) {
-        if(ticker == null){
-            throw new IllegalArgumentException();
-        }
-        try {
-            String url = taxonomyProviderUrl + ticker;
-            logger.debug("Will call API on URL: {}", url);
-
-            Set<String> exchanges = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<Set<String>>() {
-            }).getBody();
-            logger.debug("returning: {}", exchanges);
-
-            return exchanges;
-
-        } catch (HttpClientErrorException ex) {
-
-            switch (ex.getStatusCode()) {
-
-                case NOT_FOUND:
-                    throw new NotFoundException(getErrorMessage(ex));
-
-                case UNPROCESSABLE_ENTITY :
-                    throw new InvalidInputException(getErrorMessage(ex));
-
-                default:
-                    logger.warn("Got a unexpected HTTP error: {}, will rethrow it", ex.getStatusCode());
-                    logger.warn("Error body: {}", ex.getResponseBodyAsString());
-                    throw ex;
-            }
-        }
-    }
 
     @Override
     public DefaultTaxonomy getTaxonomy(String identifier, String instrument) {
