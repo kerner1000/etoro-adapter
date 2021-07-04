@@ -1,0 +1,17 @@
+spring.main.banner-mode: off
+
+server:
+  port: 7005
+
+logging:
+   level:
+     root: INFO
+     com.github.kerner1000: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+server.port: 8080
