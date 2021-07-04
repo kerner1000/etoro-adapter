@@ -1,0 +1,71 @@
+spring.main.banner-mode: off
+
+api:
+  common:
+    version: 1.0.0
+    title: Sample API
+    description: Description of the API...
+    termsOfServiceUrl: MINE TERMS OF SERVICE URL
+    license: License
+    licenseUrl: MY LICENSE URL
+    contact:
+      name: Contact
+      url: My
+      email: me@mail.com
+  transaction:
+      create:
+        description:
+          Creates a new transaction
+        notes: |
+          # Normal response
+          all good
+          # Expected error responses
+          1. If a product with the same productId as specified in the posted information already exists,
+             an <b>422 - Unprocessable Entity</b> error with a "duplicate key" error message will be returned
+
+
+server:
+  port: 7070
+
+logging:
+  level:
+    root: INFO
+    com.github.kerner1000: DEBUG
+
+app:
+
+  position-service:
+    host: localhost
+    port: 7002
+
+  taxonomy-service:
+    host: localhost
+    port: 7003
+
+  transaction-service:
+    host: localhost
+    port: 7004
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+app:
+  transaction-service:
+    host: transaction
+    port: 8080
+
+  position-service:
+    host: position
+    port: 8080
+
+  taxonomy-service:
+    host: taxonomy
+    port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.github.kerner1000: INFO
