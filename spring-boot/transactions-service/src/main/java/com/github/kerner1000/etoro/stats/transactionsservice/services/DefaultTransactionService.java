@@ -8,7 +8,7 @@ import com.github.kerner1000.etoro.stats.spring.boot.util.exceptions.InvalidInpu
 import com.github.kerner1000.etoro.stats.spring.boot.util.http.ServiceUtil;
 import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionEntity;
 import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionMapper;
-import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionsRepository;
+import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +29,12 @@ public class DefaultTransactionService implements TransactionService {
 
     private final ServiceUtil serviceUtil;
 
-    private final TransactionsRepository repository;
+    private final TransactionRepository repository;
 
     private final TransactionMapper mapper;
 
     @Autowired
-    public DefaultTransactionService(TransactionsRepository repository,
+    public DefaultTransactionService(TransactionRepository repository,
                                      TransactionMapper mapper, ServiceUtil serviceUtil) {
         this.repository = Objects.requireNonNull(repository);
         this.mapper = Objects.requireNonNull(mapper);

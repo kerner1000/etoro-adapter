@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface TransactionsRepository extends CrudRepository<TransactionEntity, Long> {
+public interface TransactionRepository extends CrudRepository<TransactionEntity, Long> {
 
     @Transactional(readOnly = true)
     List<TransactionEntity> findByInstrumentOrderByPositionId(String instrument);

@@ -60,19 +60,10 @@ public class DefaultTaxonomyService implements TaxonomyService {
     }
 
     @Override
+    @Transactional
     public DefaultTaxonomy getTaxonomy(String identifier, String instrument) {
 
-        DefaultTaxonomy defaultTaxonomy = getTaxonomy(identifier, getTickerEntity(instrument));
-
-        return defaultTaxonomy;
-    }
-
-    private Mono<DefaultTaxonomy> asyncMono(Taxonomy taxonomy) {
-        return Mono.just(new DefaultTaxonomy(taxonomy)).publishOn(scheduler);
-    }
-
-    @Transactional
-    DefaultTaxonomy getTaxonomy(String identifier, TickerEntity tickerEntity) {
+        TickerEntity tickerEntity = getTickerEntity(instrument);
 
         Taxonomy taxonomy = taxonomyRepository.getTaxonomyEntityByIdentifierAndTickerEntity(identifier, tickerEntity);
         if (taxonomy != null && taxonomy.isComplete()) {
@@ -85,13 +76,13 @@ public class DefaultTaxonomyService implements TaxonomyService {
 
 
             if (taxonomyMono.isComplete()) {
-                TaxonomyEntity taxonomyEntity = mapper.apiToEntity(taxonomy, new TaxonomyApi2EntityHelper());
+                TaxonomyEntity taxonomyEntity = mapper.apiToEntity(taxonomyMono, new TaxonomyApi2EntityHelper());
+                taxonomyRepository.save(taxonomyEntity);
                 taxonomyEntity.setTickerEntity(tickerEntity);
                 tickerEntity.getTaxonomies().add(taxonomyEntity);
-                taxonomyRepository.save(taxonomyEntity);
                 logger.debug("Saved new entity '{}' -> '{}'", taxonomy, taxonomyEntity);
             } else {
-                logger.debug("Did not save incomplete taxonomy {}", taxonomy);
+                logger.debug("Did not save incomplete taxonomy {}", taxonomyMono);
             }
             return taxonomyMono;
 

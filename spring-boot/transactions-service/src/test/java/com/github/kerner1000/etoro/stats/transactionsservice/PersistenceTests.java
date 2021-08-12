@@ -1,7 +1,7 @@
 package com.github.kerner1000.etoro.stats.transactionsservice;
 
 import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionEntity;
-import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionsRepository;
+import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class PersistenceTests {
 
     @Autowired
-    private TransactionsRepository repository;
+    private TransactionRepository repository;
 
     private TransactionEntity savedEntity;
 

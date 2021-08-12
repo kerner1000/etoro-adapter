@@ -20,7 +20,7 @@ public class DefaultYahooTaxonomyService implements TaxonomyService {
     private final Scheduler scheduler;
 
     @Autowired
-    public DefaultYahooTaxonomyService(Scheduler scheduler, @Value("${app.morningstar.apikey}") String apikey) {
+    public DefaultYahooTaxonomyService(Scheduler scheduler, @Value("${app.apikey}") String apikey) {
         this.scheduler = scheduler;
         this.api = new YahooAPI(apikey);
     }

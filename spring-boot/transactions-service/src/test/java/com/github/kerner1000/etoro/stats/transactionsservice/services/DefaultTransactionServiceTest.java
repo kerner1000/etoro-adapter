@@ -4,7 +4,7 @@ import com.github.kerner1000.etoro.stats.model.Transaction;
 import com.github.kerner1000.etoro.stats.model.TransactionType;
 import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionEntity;
 import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionMapper;
-import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionsRepository;
+import com.github.kerner1000.etoro.stats.transactionsservice.persistence.TransactionRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class DefaultTransactionServiceTest {
     DefaultTransactionService transactionService;
 
     @Autowired
-    TransactionsRepository repository;
+    TransactionRepository repository;
 
     @Autowired
     TransactionMapper mapper;
